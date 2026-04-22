@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Elmahlawy — Control & Automation Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --fg: #1a1a2e;
+            --accent: #0066ff;
+            --dim: #64748b;
+            --border: #e2e8f0;
+            --code-bg: #ffffff;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'IBM Plex Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 3rem 0 2rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        h1 {
+            font-family: var(--mono);
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .tagline {
+            font-family: var(--mono);
+            font-size: 0.9rem;
+            color: var(--dim);
+            font-weight: 300;
+            animation: slideIn 0.6s ease-out 0.1s backwards;
+        }
+
+        .status {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slideIn 0.6s ease-out 0.2s backwards;
+        }
+
+        .status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Nav */
+        nav {
+            display: flex;
+            gap: 2rem;
+            padding: 1.5rem 0;
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            animation: slideIn 0.6s ease-out 0.3s backwards;
+        }
+
+        nav a {
+            color: var(--dim);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--fg);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .bio p {
+            margin-bottom: 1.2rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-family: var(--mono);
+            font-size: 0.95em;
+        }
+
+        .skills-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--dim);
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--fg);
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            border-color: var(--accent);
+            background: rgba(0, 255, 136, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Projects */
+        .project-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .project {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.4s ease;
+        }
+
+        .project:hover {
+            border-color: var(--accent);
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(0,102,255,0.12);
+        }
+
+        .project:hover::before {
+            height: 100%;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .project h3 {
+            font-family: var(--mono);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-meta {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--dim);
+        }
+
+        .project-desc {
+            color: var(--dim);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tech-tag {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 3px;
+            color: var(--accent);
+        }
+
+        /* Experience */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.25rem;
+            top: 0.5rem;
+            width: 9px;
+            height: 9px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--border), 0 2px 4px rgba(0,102,255,0.2);
+        }
+
+        .timeline-item h3 {
+            font-family: var(--mono);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-meta {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--dim);
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-desc {
+            color: var(--dim);
+            line-height: 1.7;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            font-family: var(--mono);
+            font-size: 0.9rem;
+        }
+
+        .contact-label {
+            color: var(--dim);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-value {
+            color: var(--fg);
+        }
+
+        .contact-value a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .contact-value a:hover {
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--dim);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .timeline {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-grid">
+                <div>
+                    <h1>Mohamed Elmahlawy</h1>
+                    <p class="tagline">Control & Automation Engineering / FPGA & Embedded Systems</p>
+                </div>
+                <div class="status">
+                    Graduating June 2026
+                </div>
+            </div>
+        </header>
+
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <section id="about">
+            <div class="section-label">About</div>
+            <div class="about-content">
+                <div class="bio">
+                    <p>Final-year Control & Automation Engineering student at <span class="highlight">Yıldız Technical University</span>, specializing in FPGA-based systems, embedded design, and sensor fusion. Focused on real-time processing architectures for aerospace and robotics applications.</p>
+                    <p>Recent work includes AMD Kria-based motion capture systems with sub-centimeter accuracy, embedded Kalman filters for UAV state estimation, and UDP/Ethernet streaming over FPGA fabric. Published researcher with hands-on experience in defense and aerospace environments.</p>
+                    <p>Currently seeking <span class="highlight">funded PhD positions</span> (Fall 2027, US/Germany) in embedded systems, control theory, or FPGA architectures.</p>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Hardware</h3>
+                        <div class="skill-tags">
+                            <span class="tag">Xilinx FPGA</span>
+                            <span class="tag">AMD Kria</span>
+                            <span class="tag">STM32</span>
+                            <span class="tag">PIC18F</span>
+                            <span class="tag">ESP32</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Languages</h3>
+                        <div class="skill-tags">
+                            <span class="tag">VHDL</span>
+                            <span class="tag">C/C++</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">MATLAB</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Tools</h3>
+                        <div class="skill-tags">
+                            <span class="tag">Vivado</span>
+                            <span class="tag">Vitis</span>
+                            <span class="tag">MPLAB X</span>
+                            <span class="tag">ROS2</span>
+                            <span class="tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-label">Selected Projects</div>
+            <div class="project-grid">
+                <div class="project">
+                    <div class="project-header">
+                        <div>
+                            <h3>Motion Capture System — AMD Kria KV260</h3>
+                            <p class="project-meta">AMD-sponsored • TUSAŞ Lab • 2025-2026</p>
+                        </div>
+                    </div>
+                    <p class="project-desc">Low-cost alternative to commercial motion capture (Vicon) using FPGA-accelerated blob detection on PL and algebraic solve (DLT/SVD triangulation) on PS. Achieved sub-centimeter accuracy with confidence-weighted Kalman filtering. Conference paper submitted to SIU 2026.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AMD Kria KV260</span>
+                        <span class="tech-tag">VHDL</span>
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">MIPI CSI</span>
+                        <span class="tech-tag">Kalman Filter</span>
+                        <span class="tech-tag">Computer Vision</span>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <div>
+                            <h3>UDP Ethernet Streaming — Nexys 3 FPGA</h3>
+                            <p class="project-meta">Personal Project • 2025</p>
+                        </div>
+                    </div>
+                    <p class="project-desc">Built UDP/Ethernet streaming system on Spartan-6 using MII interface at 25MHz. Debugged FSM race conditions, nibble-swap bugs, and clock domain crossing issues. Line-per-packet architecture: 120 packets/frame, 320 bytes payload each. Achieved 160×120 video at ~4 FPS over UART.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">VHDL</span>
+                        <span class="tech-tag">Ethernet MAC</span>
+                        <span class="tech-tag">FSM Design</span>
+                        <span class="tech-tag">Clock Domain Crossing</span>
+                        <span class="tech-tag">MII Interface</span>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <div>
+                            <h3>Underwater Rescue Robot</h3>
+                            <p class="project-meta">Active Development • Phase 2</p>
+                        </div>
+                    </div>
+                    <p class="project-desc">Autonomous pool rescue system using Blue Robotics T200 thrusters, CO₂ bladder deployment, and acoustic navigation. Wearable panic device triggers autonomous search and surface deployment. Currently optimizing acoustic localization algorithms.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">ESP32</span>
+                        <span class="tech-tag">Acoustic Nav</span>
+                        <span class="tech-tag">Motor Control</span>
+                        <span class="tech-tag">Sensor Fusion</span>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <div>
+                            <h3>Kalman Filter State Estimation Module</h3>
+                            <p class="project-meta">DASAL Internship Proposal • 2025</p>
+                        </div>
+                    </div>
+                    <p class="project-desc">Proposed IMU+GPS fusion module on STM32 outputting position/velocity/orientation to proprietary flight controller. Designed for integration with DASAL's Aselsan-Altınay joint venture flight control architecture at Teknopark Istanbul.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">STM32</span>
+                        <span class="tech-tag">Kalman Filter</span>
+                        <span class="tech-tag">IMU</span>
+                        <span class="tech-tag">GPS</span>
+                        <span class="tech-tag">Real-time Systems</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="section-label">Experience</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Embedded Systems Intern — DASAL Havacılık</h3>
+                    <p class="timeline-meta">Teknopark Istanbul • Summer 2025</p>
+                    <p class="timeline-desc">Worked on sensor fusion and state estimation for UAV flight controllers. Developed Kalman filter implementations for IMU/GPS integration on STM32 platforms. Collaborated with flight control team on real-time embedded architectures.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Avionics Intern — Turkish Technic</h3>
+                    <p class="timeline-meta">Istanbul • TEKNOFEST Award • 2024</p>
+                    <p class="timeline-desc">Earned through 2nd place finish in TEKNOFEST Aviation Ideathon. Exposure to commercial aircraft avionics systems, maintenance procedures, and aerospace regulatory frameworks. Participated in line maintenance and troubleshooting operations.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Co-Founder & Leader — INNONEST (YTU International Students Club)</h3>
+                    <p class="timeline-meta">Yıldız Technical University • 2023-Present</p>
+                    <p class="timeline-desc">Founded and led YTU's international student community organization. Organized technical workshops including hands-on 3D printing training (March 2026, sponsored by Robo90) covering full workflow from CAD to post-processing. Built cross-cultural collaboration platform for engineering students.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Commercial 3D Printing — Axiom 3D Studios</h3>
+                    <p class="timeline-meta">2+ years experience</p>
+                    <p class="timeline-desc">Provided commercial 3D printing services across PLA, PETG, TPU, and flexible materials. Developed expertise in slicing optimization, material properties, and quality control for client deliverables.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-label">Contact</div>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value"><a href="mailto:your.email@example.com">your.email@example.com</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">GitHub</div>
+                    <div class="contact-value"><a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value"><a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">Istanbul, Turkey</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Mohamed Elmahlawy • Built with precision</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Intersection observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
