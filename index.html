@@ -175,9 +175,26 @@
         /* About */
         .about-content {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 200px 2fr 1fr;
+            gap: 3rem;
             margin-bottom: 2rem;
+            align-items: start;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 3px solid var(--border);
+            transition: all 0.4s ease;
+            animation: slideIn 0.6s ease-out 0.2s backwards;
+        }
+
+        .profile-photo:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0,102,255,0.2);
         }
 
         .bio {
@@ -305,10 +322,40 @@
             font-family: var(--mono);
             font-size: 0.7rem;
             padding: 0.3rem 0.6rem;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.2);
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid rgba(0, 102, 255, 0.2);
             border-radius: 3px;
             color: var(--accent);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+        }
+
+        .project-link:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .project-link::after {
+            content: '→';
+            transition: transform 0.3s;
+        }
+
+        .project-link:hover::after {
+            transform: translateX(4px);
         }
 
         /* Experience */
@@ -450,6 +497,12 @@
                 gap: 2rem;
             }
 
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto;
+            }
+
             nav {
                 flex-wrap: wrap;
                 gap: 1rem;
@@ -485,6 +538,7 @@
         <section id="about">
             <div class="section-label">About</div>
             <div class="about-content">
+                <img src="Mohamed_Elmahlavy_foto.jpg" alt="Mohamed Elmahlawy" class="profile-photo">
                 <div class="bio">
                     <p>Final-year Control & Automation Engineering student at <span class="highlight">Yıldız Technical University</span>, specializing in FPGA-based systems, embedded design, and sensor fusion. Focused on real-time processing architectures for aerospace and robotics applications.</p>
                     <p>Recent work includes AMD Kria-based motion capture systems with sub-centimeter accuracy, embedded Kalman filters for UAV state estimation, and UDP/Ethernet streaming over FPGA fabric. Published researcher with hands-on experience in defense and aerospace environments.</p>
@@ -543,6 +597,7 @@
                         <span class="tech-tag">Kalman Filter</span>
                         <span class="tech-tag">Computer Vision</span>
                     </div>
+                    <a href="projects/motion-capture.html" class="project-link">View Details</a>
                 </div>
 
                 <div class="project">
@@ -560,6 +615,7 @@
                         <span class="tech-tag">Clock Domain Crossing</span>
                         <span class="tech-tag">MII Interface</span>
                     </div>
+                    <a href="projects/udp-ethernet.html" class="project-link">View Details</a>
                 </div>
 
                 <div class="project">
@@ -576,6 +632,7 @@
                         <span class="tech-tag">Motor Control</span>
                         <span class="tech-tag">Sensor Fusion</span>
                     </div>
+                    <a href="projects/underwater-robot.html" class="project-link">View Details</a>
                 </div>
 
                 <div class="project">
@@ -593,6 +650,7 @@
                         <span class="tech-tag">GPS</span>
                         <span class="tech-tag">Real-time Systems</span>
                     </div>
+                    <a href="projects/kalman-filter.html" class="project-link">View Details</a>
                 </div>
             </div>
         </section>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Capture System - Mohamed Elmahlawy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --fg: #1a1a2e;
+            --accent: #0066ff;
+            --dim: #64748b;
+            --border: #e2e8f0;
+            --code-bg: #ffffff;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'IBM Plex Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--sans);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--dim);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+            transform: translateX(-4px);
+        }
+
+        .back-link::before {
+            content: '←';
+        }
+
+        /* Header */
+        .project-header {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-family: var(--mono);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            color: var(--dim);
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-item::before {
+            content: '▪';
+            color: var(--accent);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-tag {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            border-radius: 4px;
+            color: var(--accent);
+        }
+
+        /* Content sections */
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-family: var(--mono);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--fg);
+        }
+
+        h3 {
+            font-family: var(--mono);
+            font-size: 1.1rem;
+            margin: 2rem 0 1rem;
+            color: var(--fg);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+            color: var(--dim);
+        }
+
+        ul, ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            color: var(--dim);
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+        }
+
+        /* Image gallery */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .project-image {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .project-image:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,102,255,0.12);
+        }
+
+        .image-caption {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--dim);
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        /* Code blocks */
+        code {
+            font-family: var(--mono);
+            font-size: 0.9rem;
+            background: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            border: 1px solid var(--border);
+            color: var(--accent);
+        }
+
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        pre code {
+            border: none;
+            padding: 0;
+            background: none;
+            color: var(--fg);
+        }
+
+        /* Key features grid */
+        .features-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0,102,255,0.08);
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">Back to Portfolio</a>
+
+        <header class="project-header">
+            <h1>Motion Capture System</h1>
+            <div class="project-meta">
+                <span class="meta-item">AMD-Sponsored Project</span>
+                <span class="meta-item">2025-2026</span>
+                <span class="meta-item">TUSAŞ Lab @ YTU</span>
+            </div>
+            <p style="color: var(--fg); font-size: 1.1rem; margin-top: 1rem;">Low-cost motion capture alternative using AMD Kria KV260 SoC with FPGA-accelerated blob detection and confidence-weighted Kalman filtering. Achieved sub-centimeter accuracy at a fraction of commercial system cost.</p>
+            
+            <div class="tech-stack">
+                <span class="tech-tag">AMD Kria KV260</span>
+                <span class="tech-tag">VHDL</span>
+                <span class="tech-tag">C++</span>
+                <span class="tech-tag">MIPI CSI</span>
+                <span class="tech-tag">Computer Vision</span>
+                <span class="tech-tag">Kalman Filter</span>
+                <span class="tech-tag">DLT/SVD</span>
+                <span class="tech-tag">Vivado</span>
+            </div>
+        </header>
+
+        <section>
+            <h2>Overview</h2>
+            <p>Commercial motion capture systems like Vicon cost $50,000+ and require specialized setups. This project demonstrates that comparable accuracy can be achieved using FPGA-based processing and computer vision algorithms at a dramatically lower cost.</p>
+            
+            <p>The system uses the AMD Kria KV260 SoC, which combines programmable logic (FPGA fabric) with ARM processing cores, enabling real-time hardware acceleration of vision algorithms alongside algebraic reconstruction on the CPU.</p>
+
+            <div class="image-grid">
+                <!-- Add your images here -->
+                <div>
+                    <img src="../project-images/motion-capture-setup.jpg" alt="Motion Capture Setup" class="project-image">
+                    <p class="image-caption">Full system setup with cameras</p>
+                </div>
+                <div>
+                    <img src="../project-images/motion-capture-output.jpg" alt="Tracking Output" class="project-image">
+                    <p class="image-caption">Real-time 3D trajectory reconstruction</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>System Architecture</h2>
+            
+            <h3>Hardware Pipeline</h3>
+            <ul>
+                <li><strong>Camera Interface:</strong> OV5640 MIPI CSI cameras capture synchronized frames</li>
+                <li><strong>PL (FPGA) Processing:</strong> Hardware-accelerated blob detection identifies marker centroids in real-time</li>
+                <li><strong>PS (ARM) Processing:</strong> CPU runs DLT/SVD triangulation to reconstruct 3D positions</li>
+                <li><strong>Post-Processing:</strong> Confidence-weighted Kalman filter smooths trajectories and reduces noise</li>
+            </ul>
+
+            <h3>Key Technical Decisions</h3>
+            <p>The design splits compute-intensive tasks between PL and PS based on their characteristics:</p>
+            <ul>
+                <li>Blob detection runs on FPGA fabric (PL) — highly parallelizable, pixel-level operations benefit from custom hardware</li>
+                <li>Triangulation runs on ARM cores (PS) — matrix operations leverage optimized BLAS libraries</li>
+                <li>AXI stream interface transfers centroid coordinates from PL to PS with minimal latency</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Implementation Details</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>FPGA Blob Detection</h3>
+                    <p>Custom VHDL pipeline processes 640×480 frames at 60 FPS. Connected component labeling identifies marker regions, centroid calculation uses streaming architecture to minimize BRAM usage.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>DLT Triangulation</h3>
+                    <p>Direct Linear Transform reconstructs 3D points from multiple 2D camera views. SVD decomposition solves overconstrained system. Optimized using Eigen library for ARM NEON instructions.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Kalman Filtering</h3>
+                    <p>Confidence-weighted filter adapts measurement noise based on detection quality. Reduces jitter while maintaining responsiveness to genuine motion. ~18% RMSE improvement over raw measurements.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Camera Calibration</h3>
+                    <p>Zhang's method for intrinsic parameters, bundle adjustment for extrinsics. Calibration accuracy directly impacts reconstruction precision — achieved <0.5px reprojection error.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Results</h2>
+            <ul>
+                <li><strong>Accuracy:</strong> Sub-centimeter precision in 1m³ capture volume</li>
+                <li><strong>Latency:</strong> <20ms end-to-end (camera → 3D output)</li>
+                <li><strong>Throughput:</strong> 60 FPS tracking of 4+ markers simultaneously</li>
+                <li><strong>Cost:</strong> ~$500 hardware vs. $50k+ commercial systems</li>
+            </ul>
+
+            <p>Conference paper submitted to SIU 2026 detailing the confidence-weighted Kalman filter approach and system architecture.</p>
+        </section>
+
+        <section>
+            <h2>Challenges & Solutions</h2>
+
+            <h3>Clock Domain Crossing</h3>
+            <p>MIPI CSI pixel clock doesn't align with AXI stream clock. Implemented dual-clock FIFO with handshaking to safely transfer data between domains. Gray code counters prevent metastability.</p>
+
+            <h3>Memory Bandwidth</h3>
+            <p>Streaming architecture processes pixels in raster order without frame buffering. Reduces DRAM bandwidth from 640×480×60 = 18.4 MB/s to just centroid coordinates (~100 bytes/frame = 6 KB/s).</p>
+
+            <h3>Calibration Stability</h3>
+            <p>Initial calibration degraded over time due to thermal drift and vibration. Added periodic recalibration routine using known reference points in the capture volume.</p>
+        </section>
+
+        <section>
+            <h2>Future Work</h2>
+            <ul>
+                <li>Scale to 8+ synchronized cameras for larger capture volume</li>
+                <li>Implement marker identity tracking across occlusions</li>
+                <li>Add real-time skeleton fitting for biomechanics analysis</li>
+                <li>Port to ROS2 for integration with robotics workflows</li>
+            </ul>
+        </section>
+
+        <a href="../index.html" class="back-link" style="margin: 3rem 0;">Back to Portfolio</a>
+    </div>
+</body>
+</html>
