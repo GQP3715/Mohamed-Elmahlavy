@@ -64,10 +64,30 @@
         }
 
         .header-grid {
-            display: grid;
-            grid-template-columns: 1fr auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 2rem;
-            align-items: start;
+        }
+
+        .header-text {
+            flex: 1;
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--border);
+            transition: all 0.4s ease;
+            animation: slideIn 0.6s ease-out 0.2s backwards;
+        }
+
+        .profile-photo:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0,102,255,0.2);
         }
 
         h1 {
@@ -175,26 +195,10 @@
         /* About */
         .about-content {
             display: grid;
-            grid-template-columns: 200px 2fr 1fr;
+            grid-template-columns: 2fr 1fr;
             gap: 3rem;
             margin-bottom: 2rem;
             align-items: start;
-        }
-
-        .profile-photo {
-            width: 200px;
-            height: 200px;
-            border-radius: 12px;
-            object-fit: cover;
-            border: 3px solid var(--border);
-            transition: all 0.4s ease;
-            animation: slideIn 0.6s ease-out 0.2s backwards;
-        }
-
-        .profile-photo:hover {
-            border-color: var(--accent);
-            transform: scale(1.05);
-            box-shadow: 0 8px 24px rgba(0,102,255,0.2);
         }
 
         .bio {
@@ -245,7 +249,7 @@
 
         .tag:hover {
             border-color: var(--accent);
-            background: rgba(0, 255, 136, 0.05);
+            background: rgba(0, 102, 255, 0.05);
             transform: translateY(-2px);
         }
 
@@ -489,18 +493,19 @@
             }
 
             .header-grid {
-                grid-template-columns: 1fr;
+                flex-direction: column-reverse;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-photo {
+                width: 100px;
+                height: 100px;
             }
 
             .about-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-            }
-
-            .profile-photo {
-                width: 150px;
-                height: 150px;
-                margin: 0 auto;
             }
 
             nav {
@@ -518,10 +523,11 @@
     <div class="container">
         <header>
             <div class="header-grid">
-                <div>
+                <div class="header-text">
                     <h1>Mohamed Elmahlavy</h1>
                     <p class="tagline">CONTROL & EMBEDDED ENGINEER</p>
                 </div>
+                <img src="Mohamed_Elmahlavy_foto.jpg" alt="Mohamed Elmahlawy" class="profile-photo">
             </div>
         </header>
 
@@ -535,7 +541,6 @@
         <section id="about">
             <div class="section-label">About</div>
             <div class="about-content">
-                <img src="Mohamed_Elmahlavy_foto.jpg" alt="Mohamed Elmahlawy" class="profile-photo">
                 <div class="bio">
                     <p>Control & Automation Engineering student in <span class="highlight">Yıldız Technical University</span>, specializing in control, embedded, and real-time systems, with hands-on experience in FPGA/SoC platforms, STM32 microcontrollers, and UAV architectures. Experienced in sensor fusion, communication systems, and Pixhawk-based UAV platforms. Focused on bridging control theory with real-time embedded implementation in robotics and UAV systems. Teknofest 2nd place winner with strong experience in multidisciplinary engineering projects and technical leadership.</p>
                     <p>Recent work includes devolping a FPGA based Edge-Distributed Computer Vision Architecture for Real-Time 3D Motion Capture and Robotic Teleoperation Sponsored By  <span class="highlight">AMD</span>. also Getting Second Place in <span class="highlight">Teknofest</span>.</p>
@@ -566,14 +571,16 @@
                 <div class="project">
                     <div class="project-header">
                         <div>
-                            <h3>FPGA based Motion Capture System - Xilinx Nexys 3</h3>
-                            <p class="project-meta">Phase 1 • 2025-2026</p>
+                            <h3>FPGA based Edge-Distributed Computer Vision Architecture for Real-Time 3D Motion Capture and Robotic Teleoperation</h3>
+                            <p class="project-meta">Graduation project • 2025-2026</p>
                         </div>
                     </div>
                     <p class="project-desc">
-                    The first phase of my Bachelor's degree graduation project focuses on developing a low-cost motion capture (MoCap) system as an alternative to expensive systems like Vicon, combining FPGA programming with control theory.</p>
+                    My Bachelor's degree graduation project focuses on developing a low-cost motion capture (MoCap) system as an alternative to expensive systems like Vicon, combining FPGA programming with control theory.</p>
                     <div class="project-tech">
+                        <span class="tech-tag">FPGA</span>
                         <span class="tech-tag">Xilinx Nexys 3</span>
+                        <span class="tech-tag">AMD Kria KV 260</span>
                         <span class="tech-tag">VHDL</span>
                         <span class="tech-tag">C++</span>
                         <span class="tech-tag">Edge Computing</span>
@@ -586,17 +593,20 @@
                 <div class="project">
                     <div class="project-header">
                         <div>
-                            <h3>UDP Ethernet Streaming — Nexys 3 FPGA</h3>
-                            <p class="project-meta">Personal Project • 2025</p>
+                            <h3>MODELING AND SIMULATION OF A DJ IMAVIC PRO DRONE</h3>
+                            <p class="project-meta">2025</p>
                         </div>
                     </div>
-                    <p class="project-desc">Built UDP/Ethernet streaming system on Spartan-6 using MII interface at 25MHz. Debugged FSM race conditions, nibble-swap bugs, and clock domain crossing issues. Line-per-packet architecture: 120 packets/frame, 320 bytes payload each. Achieved 160×120 video at ~4 FPS over UART.</p>
+                    <p class="project-desc">Modeled, simulated, and controlled a DJI Mavic Pro Drone in MATLAB SIMULINK, with a focus on designing a PID controller for precise altitude and attitude control.</p>
                     <div class="project-tech">
-                        <span class="tech-tag">VHDL</span>
-                        <span class="tech-tag">Ethernet MAC</span>
-                        <span class="tech-tag">FSM Design</span>
-                        <span class="tech-tag">Clock Domain Crossing</span>
-                        <span class="tech-tag">MII Interface</span>
+                        <span class="tech-tag">PID control</span>
+                        <span class="tech-tag">MATLAB</span>
+                        <span class="tech-tag">Simulink</span>
+                        <span class="tech-tag">System modeling</span>
+                        <span class="tech-tag">feedback control</span>
+                        <span class="tech-tag">stability analysis</span>
+                        <span class="tech-tag">signal mapping</span>
+                        <span class="tech-tag">UAV dynamics</span>
                     </div>
                     <a href="projects/udp-ethernet.html" class="project-link">View Details</a>
                 </div>
@@ -604,16 +614,22 @@
                 <div class="project">
                     <div class="project-header">
                         <div>
-                            <h3>Underwater Rescue Robot</h3>
-                            <p class="project-meta">Active Development • Phase 2</p>
+                            <h3>Visual-Inertial Fusion for UGV & MoCap System</h3>
+                            <p class="project-meta">2026</p>
                         </div>
                     </div>
-                    <p class="project-desc">Autonomous pool rescue system using Blue Robotics T200 thrusters, CO₂ bladder deployment, and acoustic navigation. Wearable panic device triggers autonomous search and surface deployment. Currently optimizing acoustic localization algorithms.</p>
+                    <p class="project-desc">Designed a nonlinear sensor fusion system for real-time state estimation and localization, Implementing EKF, UKF, and PF; evaluated via RMSE, showing improved accuracy and robustness under noisy and occluded conditions.</p>
                     <div class="project-tech">
-                        <span class="tech-tag">ESP32</span>
-                        <span class="tech-tag">Acoustic Nav</span>
-                        <span class="tech-tag">Motor Control</span>
+                        <span class="tech-tag">IMU</span>
+                        <span class="tech-tag">Visual odometry</span>
+                        <span class="tech-tag">Nonlinear systems</span>
                         <span class="tech-tag">Sensor Fusion</span>
+                        <SPAN class="tech-tag">Kalman Filter</span>
+                        <span class="tech-tag">State estimation</span>
+                        <span class="tech-tag">MATLAB</span>
+                        <span class="tech-tag">Simulink</span>
+                        <span class="tech-tag">Robotics</span>
+
                     </div>
                     <a href="projects/underwater-robot.html" class="project-link">View Details</a>
                 </div>
